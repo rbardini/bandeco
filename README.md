@@ -19,7 +19,7 @@ Open up http://localhost:3000 and _bom apetite!_
 
 ## To-Do
 
-- [ ] Show weekly menu
+- [X] Show weekly menu
 - [ ] Add credit checking
 - [ ] Add offline support
 - [ ] Show food images

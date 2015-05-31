@@ -1,11 +1,10 @@
 import React from 'react'
 import {connectToStores, provideContext} from 'fluxible/addons'
-import {remove as removeDiacritics} from 'diacritics'
 import {WEEKDAYS, RELATIVE_DAYS, MEALS, HOURS} from '../constants'
+import {normalizeString} from '../utils/StringUtils'
 import ApplicationStore from '../stores/ApplicationStore'
 import Menu from './Menu'
-
-var normalizeString = str => removeDiacritics(str).toLowerCase()
+import WeekMenu from './WeekMenu'
 
 class Application extends React.Component {
   constructor (props, context) {
@@ -31,6 +30,10 @@ class Application extends React.Component {
   }
 
   getWeekday () {
+    return WEEKDAYS[this.date.getDay() % 7]
+  }
+
+  getOffsetWeekday () {
     var today = this.date.getDay()
     var offset = +this.isClosed()
 
@@ -38,7 +41,7 @@ class Application extends React.Component {
   }
 
   getMenu () {
-    var weekday = normalizeString(this.getWeekday())
+    var weekday = normalizeString(this.getOffsetWeekday())
     var meal = normalizeString(this.getMeal())
 
     return this.state.menu[weekday][meal]
@@ -48,14 +51,20 @@ class Application extends React.Component {
     this.date = new Date()
 
     var meal = this.getMeal()
-    var day = this.getRelativeDay()
-    var menu = this.getMenu()
-    var props = {
-      title: `${meal} de ${day}`,
-      menu
-    }
+    var relativeDay = this.getRelativeDay()
+    var title = `${meal} de ${relativeDay}`
 
-    return <Menu {...props} />
+    return (
+      <div>
+        <Menu
+          title={title}
+          menu={this.getMenu()}
+          large={true} />
+        <WeekMenu
+          menu={this.state.menu}
+          today={this.getWeekday()} />
+      </div>
+    )
   }
 }
 

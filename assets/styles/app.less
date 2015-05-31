@@ -1,3 +1,9 @@
+/* Variables */
+@grey-300: #E0E0E0;
+@grey-500: #9E9E9E;
+@grey-700: #616161;
+@grey-900: #212121;
+
 /* General */
 * {
   margin: 0;
@@ -5,8 +11,9 @@
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: lighter;
+  color: @grey-900;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -1px;
   text-transform: lowercase;
 }
 
@@ -15,24 +22,69 @@ ul {
 }
 
 ::selection {
-  background: #000;
+  background: @grey-900;
   color: #fff;
 }
 
 /* Menu */
 .c-menu {
-  font-size: 100px;
-  letter-spacing: -10px;
   list-style: none;
+
+  &--large {
+    font-size: 100px;
+    letter-spacing: -10px;
+    line-height: 0.8;
+  }
+
+  &__title {
+    color: @grey-500;
+    font-size: 1em;
+    font-weight: normal;
+  }
+
+  &__list {
+    margin-left: 0.8em;
+  }
 }
 
-.c-menu__title {color: #aaa;
-  font-size: 100px;
-  font-weight: lighter;
-  line-height: 1;
-}
+/* Week menu */
+.c-week-menu {
+  border-collapse: collapse;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
 
-.c-menu__item {color: #000;
-  line-height: 0.85;
-  padding-left: 100px;
+  &__header {
+    line-height: 1;
+    text-align: left;
+    vertical-align: top;
+
+    &:first-child {
+      text-align: right;
+    }
+  }
+
+  &__column {
+    width: 100% / 8;
+
+    &:not(:first-child) {
+      border-left: 1px solid @grey-900;
+    }
+
+    &.is-today {
+      background: @grey-300;
+    }
+  }
+
+  &__row {
+    &:not(:last-child) {
+      border-bottom: 1px solid @grey-900;
+    }
+  }
+
+  &__cell {
+    color: @grey-700;
+    padding: 0.2em 0;
+    vertical-align: top;
+  }
 }
