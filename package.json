@@ -29,10 +29,7 @@
   "bugs": {
     "url": "https://github.com/rbardini/bandeco/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/rbardini/bandeco/raw/master/LICENSE"
-  },
+  "license": "MIT",
   "dependencies": {
     "async": "^1.0.0",
     "babel": "^5.4.7",
