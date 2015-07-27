@@ -1,5 +1,6 @@
 import React from 'react'
-import Logger, {log} from './utils/Logger';
+import {createElementWithContext} from 'fluxible-addons-react'
+import Logger, {log} from './utils/Logger'
 import app from './app'
 
 const exposedState = window.App
@@ -16,5 +17,5 @@ app.rehydrate(exposedState, function (err, context) {
   const mountNode = document.getElementById('app')
 
   log('rendering application...')
-  React.render(context.createElement(), mountNode, () => log('application rendered'))
+  React.render(createElementWithContext(context), mountNode, () => log('application rendered'))
 })

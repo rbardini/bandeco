@@ -3,7 +3,7 @@ export default function getMenu (context, payload, done) {
 
   context.service.read('menu', {}, {}, function (err, menu) {
     if (err) {
-      context.dispatch('RECEIVE_MENU_FAILURE', payload)
+      context.dispatch('RECEIVE_MENU_FAILURE', err)
       return done()
     }
 

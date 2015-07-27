@@ -3,22 +3,48 @@
 @grey-500: #9E9E9E;
 @grey-700: #616161;
 @grey-900: #212121;
+@red-700:  #D32F2F;
 
 /* General */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+body, input, textarea, button {
+  color: @grey-900;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-transform: lowercase;
 }
 
 body {
-  color: @grey-900;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   letter-spacing: -1px;
-  text-transform: lowercase;
+}
+
+input {
+  border-bottom: 1px solid;
+  padding: 0.2em 0;
+}
+
+button {
+  background: @grey-900;
+  color: @grey-300;
+  padding: 0.2em 0.4em;
 }
 
 ul {
   list-style: none;
+}
+
+a {
+  color: @grey-700;
+
+  &:hover {
+    color: @grey-900;
+  }
 }
 
 ::selection {
@@ -86,5 +112,40 @@ ul {
     color: @grey-700;
     padding: 0.2em 0;
     vertical-align: top;
+  }
+}
+
+/* Sidebar */
+.c-sidebar {
+  float: right;
+  font-size: 14px;
+  margin: 0 0.2em;
+  width: 150px;
+
+  &__title {
+    font-size: 18px;
+    font-weight: normal;
+  }
+}
+
+/* Balance */
+.c-balance {
+  &__form-field,
+  &__form-button {
+    font-size: 12px;
+    margin-bottom: 0.4em;
+  }
+
+  &__form-field {
+    display: block;
+    width: 100%;
+  }
+
+  &__forgot-pw {
+    float: right;
+  }
+
+  &__error {
+    color: @red-700;
   }
 }

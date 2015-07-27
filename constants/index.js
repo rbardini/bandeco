@@ -1,4 +1,6 @@
-export const ENDPOINT = 'http://www.pcasc.usp.br/restaurante.xml'
+export const MENU_ENDPOINT = 'http://www.pcasc.usp.br/restaurante.xml'
+
+export const CREDITS_ENDPOINT = 'https://uspdigital.usp.br/rucard'
 
 export const REFRESH_INTERVAL = 1000 * 60 * 60
 

@@ -1,13 +1,10 @@
 import request from 'request'
 import xml2js from 'xml2js'
-import iconv from 'iconv-lite'
 import async from 'async'
 import traverse from 'traverse'
 import moment from 'moment'
-import {ENDPOINT, REFRESH_INTERVAL} from '../constants'
+import {MENU_ENDPOINT as ENDPOINT, REFRESH_INTERVAL} from '../constants'
 import {log} from '../utils/Logger'
-
-iconv.extendNodeEncodings()
 
 class Waiter {
   constructor () {

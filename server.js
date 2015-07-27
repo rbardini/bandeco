@@ -5,10 +5,14 @@ import serialize from 'serialize-javascript'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
+import {createElementWithContext} from 'fluxible-addons-react'
 import app from './app'
 import Html from './components/Html'
 import getMenu from './actions/getMenu'
 import {log} from './utils/Logger'
+
+import iconv from 'iconv-lite'
+iconv.extendNodeEncodings()
 
 const HtmlComponent = React.createFactory(Html)
 
@@ -22,6 +26,7 @@ server.use(csrf({ cookie: true }))
 
 let fetchrPlugin = app.getPlugin('FetchrPlugin')
 fetchrPlugin.registerService(require('./services/menu'))
+fetchrPlugin.registerService(require('./services/balance'))
 server.use(fetchrPlugin.getXhrPath(), fetchrPlugin.getMiddleware())
 
 server.get('/', (req, res, next) => {
@@ -39,7 +44,7 @@ server.get('/', (req, res, next) => {
 
     log('rendering application into markup')
     var html = '<!doctype html>' + React.renderToStaticMarkup(HtmlComponent({
-      markup: React.renderToString(context.createElement()),
+      markup: React.renderToString(createElementWithContext(context)),
       context: context.getComponentContext(),
       state: exposedState
     }))
