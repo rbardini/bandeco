@@ -11,9 +11,6 @@ import Html from './components/Html'
 import getMenu from './actions/getMenu'
 import {log} from './utils/Logger'
 
-import iconv from 'iconv-lite'
-iconv.extendNodeEncodings()
-
 const HtmlComponent = React.createFactory(Html)
 
 const server = express()

@@ -1,4 +1,5 @@
 import request from 'request'
+import iconv from 'iconv-lite'
 import xml2js from 'xml2js'
 import async from 'async'
 import traverse from 'traverse'
@@ -14,12 +15,12 @@ class Waiter {
   requestMenu (callback) {
     request.get({
       url: ENDPOINT,
-      encoding: 'iso-8859-1'
+      encoding: null
     }, callback)
   }
 
   convertMenu (response, menu, callback) {
-    xml2js.parseString(menu, {
+    xml2js.parseString(iconv.decode(menu, 'iso-8859-1'), {
       explicitArray: false,
       explicitRoot: false,
       normalize: true,

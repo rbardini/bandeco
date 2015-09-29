@@ -1,11 +1,12 @@
 import async from 'async'
 import request from 'request'
+import iconv from 'iconv-lite'
 import cheerio from 'cheerio'
 import {CREDITS_ENDPOINT as ENDPOINT} from '../constants'
 import {log} from '../utils/Logger'
 
 const req = request.defaults({
-  encoding: 'iso-8859-1',
+  encoding: null,
   jar: true
 })
 
@@ -15,7 +16,7 @@ var authenticateUser = (credentials, callback) => {
 }
 
 var navigateToCredits = (res, body, callback) => {
-  var $ = cheerio.load(body)
+  var $ = cheerio.load(iconv.decode(body, 'iso-8859-1'))
   var error = $('#layout_conteudo').children('div').first()
 
   if (error.length) return callback(new Error(error.text().trim()))
@@ -24,7 +25,7 @@ var navigateToCredits = (res, body, callback) => {
 }
 
 var extractBalance = (res, body, callback) => {
-  var $ = cheerio.load(body)
+  var $ = cheerio.load(iconv.decode(body, 'iso-8859-1'))
   var balance = $('.table_list td').last().text()
 
   callback(null, +balance)
