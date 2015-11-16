@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom/server'
 import express from 'express'
 import favicon from 'serve-favicon'
 import serialize from 'serialize-javascript'
@@ -7,6 +8,8 @@ import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
 import {createElementWithContext} from 'fluxible-addons-react'
 import app from './app'
+import menu from './services/menu'
+import balance from './services/balance'
 import Html from './components/Html'
 import getMenu from './actions/getMenu'
 import {log} from './utils/Logger'
@@ -22,8 +25,8 @@ server.use(bodyParser.json())
 server.use(csrf({ cookie: true }))
 
 let fetchrPlugin = app.getPlugin('FetchrPlugin')
-fetchrPlugin.registerService(require('./services/menu'))
-fetchrPlugin.registerService(require('./services/balance'))
+fetchrPlugin.registerService(menu)
+fetchrPlugin.registerService(balance)
 server.use(fetchrPlugin.getXhrPath(), fetchrPlugin.getMiddleware())
 
 server.get('/', (req, res, next) => {
@@ -40,8 +43,8 @@ server.get('/', (req, res, next) => {
     var exposedState = `window.App=${serialize(dehydratedState)};`
 
     log('rendering application into markup')
-    var html = '<!doctype html>' + React.renderToStaticMarkup(HtmlComponent({
-      markup: React.renderToString(createElementWithContext(context)),
+    var html = '<!doctype html>' + ReactDOM.renderToStaticMarkup(HtmlComponent({
+      markup: ReactDOM.renderToString(createElementWithContext(context)),
       context: context.getComponentContext(),
       state: exposedState
     }))

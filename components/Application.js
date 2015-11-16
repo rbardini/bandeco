@@ -60,7 +60,7 @@ class Application extends React.Component {
         <Menu
           title={title}
           menu={this.getMenu()}
-          large={true} />
+          large />
         <WeekMenu
           menu={this.props.menu}
           today={this.getWeekday()} />
